@@ -1,0 +1,20 @@
+Dataset: Home Credit Default Risk Dataset (Modified Version)
+
+Primary Source:
+Mendeley Data Repository
+https://data.mendeley.com/datasets/c8fnb7tgb3/1
+
+Original Dataset Source:
+Kaggle - Home Credit Default Risk Dataset
+
+Dataset File Used:
+application_train_new.csv
+
+Project Topic:
+Loan Default Risk Classification for Banking
+
+Description:
+This dataset contains financial, demographic, and credit-related information used to predict whether a loan applicant will default.
+
+Note:
+The dataset file is not uploaded to GitHub due to file size limitations.
