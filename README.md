@@ -99,10 +99,6 @@ Loan-Default-Risk-Classification/
 
 ---
 
-## Conclusion
-This project demonstrates how machine learning techniques can be used to predict loan default risk effectively. By comparing different classification algorithms and evaluation metrics, the project identifies models that provide reliable prediction performance for financial risk assessment.
-
----
 
 ## Team Contributions
 - Data Cleaning & EDA
