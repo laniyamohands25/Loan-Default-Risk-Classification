@@ -1,399 +1,361 @@
-# Loan Default Risk Classification for Banking
+# 🏦 Loan Default Risk Classification
 
-> Predictive Analytics Course Project | 
+> **Project #__ — Predictive Analytics (Group Project)**
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://loan-default-risk-classification-project3.streamlit.app/)
+
+---
 ---
 
 # 📋 Project Details
 
 | Field | Details |
 |---|---|
-| Course | Predictive Analytics |
-| Institution | Kerala Digital University |
-| Project Type | Banking Risk Analytics & Machine Learning |
-| Dataset | Home Credit Default Risk Dataset |
+| **Course** | Predictive Analytics |
+| **Institution** | Kerala Digital University |
+| **Project Type** | Machine Learning & Predictive Analytics |
+| **Deployment** | Streamlit Web Application |
+| **Models Used** | Logistic Regression, Random Forest, LightGBM |
 
 ---
+## 👥 Team Members & Course Details
 
-# 👥 Team Members
 
-| Name | |
+| Name |  |
 |---|---|
-|Group  | Project3 |
-| Sreekutty Santhosh | |
+| Project __ | Group __ |
+| Sreekutty Santhosh |  |
 | Laniya Mohan |  |
-|Theertha Vijayachandran |  |
+| Theertha Vijyachandran |  |
+
 
 ---
-
-# 📚 Stage 1: Problem Definition & Literature Review
-
-Loan default prediction is an important problem in banking and financial risk management. Financial institutions use predictive analytics and machine learning techniques to identify high-risk borrowers before approving loans.
-
-Traditional machine learning approaches such as Logistic Regression are widely used for credit risk analysis because of their interpretability and simplicity. Advanced ensemble learning methods such as Random Forest and LightGBM improve prediction performance by capturing complex nonlinear financial patterns.
-
-Recent banking analytics research highlights the importance of handling class imbalance because loan default datasets usually contain significantly fewer default cases than non-default cases. Therefore, recall becomes an important evaluation metric for identifying risky borrowers correctly.
-
-Explainable AI techniques such as SHAP are increasingly used in banking systems to improve transparency and interpretability.
-
-This project applies these concepts to the Home Credit loan default dataset.
-
----
-
-# 📌 Problem Statement
-
-The objective of this project is to predict whether a loan applicant is likely to default using machine learning techniques on banking and credit-related data.
-
-The project focuses on:
-- identifying risky borrowers
-- handling imbalanced financial datasets
-- improving recall
-- reducing risky loan approvals
-
----
-
-# 📊 Stage 2: Data Collection & Understanding
-
-## Dataset Used
-
-Modified Home Credit Default Risk Dataset
-
-### Primary Source
-
-Mendeley Data Repository
-
-https://data.mendeley.com/datasets/c8fnb7tgb3/1
-
-### Original Source
-
-Kaggle — Home Credit Default Risk Dataset
-
----
-
-## Dataset Characteristics
-
-- Binary classification dataset
-- Real-world banking risk dataset
-- Highly imbalanced target variable
-- Contains missing values and outliers
-- Financial and demographic features included
-
----
-
-## Important Features
-
-- Applicant Income (`AMT_INCOME_TOTAL`)
-- Loan Amount (`AMT_CREDIT`)
-- Loan Annuity (`AMT_ANNUITY`)
-- Goods Price (`AMT_GOODS_PRICE`)
-- External Credit Scores (`EXT_SOURCE_*`)
-- Employment Information
-- Age Information
-
----
-
-## Target Variable
-
-| Label | Meaning |
+| Field | Details |
 |---|---|
-| 0 | Non-default |
-| 1 | Loan Default |
+| **Project Title** | Loan Default Risk Classification for Banking |
+| **Dataset** | Home Credit Default Risk (`application_train.csv`) |
+| **Course** | Data Science Project (Machine Learning / AI) |
+
+
+| **Live Deployment** | *(https://loan-default-risk-classification-project3.streamlit.app/)* |
 
 ---
 
-## Class Distribution
+## 📌 Problem Statement & Motivation
 
-| Class | Percentage |
+Many individuals lack sufficient credit history, making it difficult for banks to assess loan eligibility fairly. Traditional credit scoring systems often exclude legitimate borrowers, while approving high-risk applicants can lead to significant financial losses.
+
+This project addresses the challenge of binary loan default classification — predicting whether an applicant is likely to default on a loan. The goal is to build a model that:
+
+- Minimizes risky approvals (optimizes for recall on the default class)
+- Ensures fairness using income, employment, and credit history features
+- Provides regulatory-compliant explainability using SHAP values
+- Deploys as an interactive web application for real-world use
+
+---
+
+## 📊 Dataset Description
+
+| Property | Details |
 |---|---|
-| Non-default | ~91.9% |
-| Default | ~8.1% |
+| **Source** | Home Credit Default Risk — Kaggle |
+| **File Used** | `application_train.csv` |
+| **Total Records** | 307,511 rows (approx.) |
+| **Original Features** | 122 columns |
+| **Target Variable** | `TARGET` — `0` = No Default, `1` = Default |
+| **Class Distribution** | Highly imbalanced (~92% No Default / ~8% Default) |
 
-The dataset is highly imbalanced, making recall an important metric for identifying risky loan applicants.
-
----
-
-# ⚙️ Stage 3: Data Preprocessing & Cleaning
-
-The following preprocessing techniques were applied:
-
-- Missing value analysis
-- Removal of highly sparse columns
-- Median imputation for numerical columns
-- Mode imputation for categorical columns
-- Handling missing values
-- Preparing data for machine learning workflows
-
----
-
-# 📊 Stage 4: Exploratory Data Analysis (EDA)
-
-EDA techniques completed in the project include:
-
-- Loan default class distribution analysis
-- Income distribution analysis
-- Income vs default analysis
-- Credit-related feature analysis
-- Correlation heatmap analysis
-- Outlier analysis
-
----
-
-## Key EDA Observations
-
-- The dataset is highly imbalanced with significantly fewer default cases.
-- Income-related features contain extreme outliers.
-- Credit-related external score features strongly influence default risk.
-- Loan amount and annuity features show strong positive correlation.
-
----
-
-# 🧩 Stage 5: Feature Engineering & Selection
-
-## Engineered Features
+### Key Features Used
 
 | Feature | Description |
 |---|---|
-| Loan-to-Income Ratio | Measures loan burden relative to applicant income |
-
-This engineered feature helps capture financial repayment burden and risk exposure.
-
----
-
-## Selected Features for Modeling
-
-The following important financial features were selected:
-
-- AMT_INCOME_TOTAL
-- AMT_CREDIT
-- AMT_ANNUITY
-- AMT_GOODS_PRICE
-- EXT_SOURCE_2
-- DAYS_BIRTH
-- DAYS_EMPLOYED
-- LOAN_TO_INCOME_RATIO
+| `AMT_INCOME_TOTAL` | Applicant annual income |
+| `AMT_CREDIT` | Total loan amount requested |
+| `AMT_ANNUITY` | Monthly loan repayment |
+| `AMT_GOODS_PRICE` | Price of financed goods |
+| `EXT_SOURCE_2` | External credit score |
+| `DAYS_BIRTH` | Applicant age (days) |
+| `DAYS_EMPLOYED` | Employment duration |
+| `LOAN_TO_INCOME_RATIO` | Engineered financial ratio |
 
 ---
 
-# 🔀 Train-Test Split Preparation
+## 🔬 Methodology Overview
 
-The dataset was split into training and testing sets using stratified sampling to preserve class imbalance distribution.
+The project follows the complete Data Science Project Life Cycle.
 
-- Training Set: 80%
-- Testing Set: 20%
+### Stage 1 — Problem Definition & Literature Review
 
-Stratified sampling was used because the dataset is highly imbalanced.
+Defined the binary classification problem to predict loan default risk. Studied literature related to credit risk modelling, class imbalance handling, explainable AI, and regulatory compliance in banking systems.
 
----
-# 🤖 Stage 6: Model Training & Evaluation
+### Stage 2 — Data Collection & Understanding
 
-## Handling Imbalanced Data
+- Loaded dataset using Pandas
+- Explored shape, datatypes, missing values, and target distribution
+- Identified severe class imbalance in the dataset
 
-Since the dataset is highly imbalanced, SMOTE (Synthetic Minority Oversampling Technique) was applied to the training dataset to improve the model’s ability to identify default cases.
+### Stage 3 — Data Preprocessing & Cleaning
 
-Benefits of using SMOTE:
-- Improves minority class learning
-- Reduces model bias toward non-default cases
-- Enhances recall for risky borrower detection
+- Removed columns with more than 50% missing values
+- Applied median imputation for numerical features
+- Applied mode imputation for categorical features
+- Performed log transformation using `np.log1p()` for income distribution normalization
 
----
+### Stage 4 — Exploratory Data Analysis (EDA)
 
-## Feature Scaling
+Performed visual analysis using:
 
-Feature scaling was applied using `StandardScaler` for models sensitive to feature magnitude, especially Logistic Regression.
+- Count plots for loan default distribution
+- Boxplots for income comparison
+- Correlation heatmaps
+- Credit score vs default analysis
+- Feature relationship visualization
 
-Scaled features help:
-- improve convergence speed
-- reduce training instability
-- improve model performance
+### Stage 5 — Feature Engineering & Selection
 
----
+Created engineered features such as:
 
-# 🧠 Machine Learning Models Used
+```python
+LOAN_TO_INCOME_RATIO = AMT_CREDIT / AMT_INCOME_TOTAL
+```
 
-The following machine learning models were trained and evaluated:
+Selected important features based on:
 
-| Model | Purpose |
+- Correlation analysis
+- Domain relevance
+- Model importance
+
+Dataset was split using stratified train-test splitting (80/20).
+
+### Stage 6 — Model Building & Training
+
+Three machine learning models were trained and compared.
+
+| Model | Configuration |
 |---|---|
-| Logistic Regression | Baseline interpretable classification model |
-| Random Forest Classifier | Ensemble learning for nonlinear relationships |
-| LightGBM Classifier | Gradient boosting for high-performance prediction |
+| Logistic Regression | `class_weight='balanced'` |
+| Random Forest | 300 trees with max depth |
+| LightGBM | Gradient boosting with imbalance handling |
 
----
+#### Handling Class Imbalance
 
-# 📈 Logistic Regression
+- SMOTE applied on training data
+- Balanced class weights used
+- `scale_pos_weight` used in LightGBM
 
-Logistic Regression was trained using scaled and SMOTE-balanced data.
+#### Data Scaling
 
-### Important Configurations
-- `class_weight='balanced'`
-- `max_iter=1000`
-- L2 regularization applied
+`StandardScaler` applied after SMOTE processing.
 
-### Purpose
-- Provides interpretable predictions
-- Commonly used in banking risk analytics
-- Serves as a strong baseline classification model
+### Stage 7 — Model Evaluation & Comparison
 
----
-
-# 🌲 Random Forest Classifier
-
-Random Forest was trained using ensemble learning techniques to improve prediction performance.
-
-### Important Configurations
-- `n_estimators=300`
-- `max_depth=12`
-- `class_weight='balanced'`
-
-### Purpose
-- Captures nonlinear feature interactions
-- Reduces overfitting through multiple decision trees
-- Improves classification stability
-
----
-
-# ⚡ LightGBM Classifier
-
-LightGBM was implemented as an advanced gradient boosting model for improved predictive performance.
-
-### Important Configurations
-- Gradient boosting framework
-- Optimized learning rate
-- Scale positive weight adjustment for imbalance handling
-
-### Purpose
-- Faster training
-- Better handling of large datasets
-- Improved prediction performance on imbalanced financial data
-
----
-
-# 📊 Model Evaluation Metrics
-
-The following evaluation metrics were used to compare model performance:
+Models evaluated using:
 
 - Accuracy
 - Precision
 - Recall
 - F1-Score
-- ROC-AUC Score
+- ROC-AUC
 
-Recall was considered particularly important because correctly identifying risky borrowers is critical in banking applications.
+Primary optimization target: **Recall**, to reduce false negatives and risky loan approvals.
+
+#### Evaluation Visualizations
+
+- Confusion matrices
+- ROC curves
+- Precision-Recall curves
+
+### Stage 8 — Explainability Using SHAP
+
+Implemented SHAP explainability for model transparency.
+
+- Used `shap.TreeExplainer`
+- Generated SHAP summary plots
+- Identified important predictors affecting loan default
+
+Top impactful features:
+
+- `EXT_SOURCE_2`
+- `LOAN_TO_INCOME_RATIO`
+- `AMT_CREDIT`
+- `AMT_INCOME_TOTAL`
+
+### Stage 9 — Streamlit Deployment
+
+Built a complete interactive Streamlit application with:
+
+- Applicant input forms
+- Real-time prediction
+- Risk classification
+- Probability gauge charts
+- Model comparison tables
+- Recommendation system
+- Live metrics display
+
+### Stage 10 — Documentation
+
+Project includes:
+
+- Jupyter notebook documentation
+- Streamlit deployment app
+- Requirements file
+- Complete GitHub README
 
 ---
 
-# 📉 Confusion Matrix Analysis
+## 📈 Results Summary
 
-Confusion matrices were generated for all trained models to visualize classification performance.
+### Model Comparison
 
-The confusion matrix helps identify:
-- True Positives
-- True Negatives
-- False Positives
-- False Negatives
+| Model | Strength | Weakness |
+|---|---|---|
+| Logistic Regression | Fast and interpretable | Lower recall |
+| Random Forest | Good precision | Slower inference |
+| LightGBM | Best recall and ROC-AUC | Slightly less interpretable |
 
-This analysis provides deeper insight into how effectively each model predicts loan defaults and non-default cases.
+### Key Findings
 
----
-
-# 🏆 Model Comparison
-
-The trained machine learning models were compared based on:
-- predictive performance
-- recall
-- classification stability
-- ability to detect risky borrowers
-
-Ensemble methods such as Random Forest and LightGBM showed improved capability in handling complex financial risk patterns compared to baseline models.
+- `EXT_SOURCE_2` is the strongest predictor of default
+- Engineered features improved prediction performance
+- SMOTE significantly improved minority class recall
+- Threshold tuning improved high-risk detection
 
 ---
 
-# 📁 Updated Project Structure
+---
+
+## ⚙️ Local Setup & Running Instructions
+
+### Prerequisites
+
+- Python 3.8+
+- pip
+
+### 1. Clone Repository
 
 ```bash
-Loan-Default-Risk-Classification/
-│
-├── notebooks/
-│   ├── 1_Data_Cleaning_and_EDA.ipynb
-│   ├── 2_Feature_Selection.ipynb
-│   └── 3_Model_Training.ipynb
-│
-├── data/
-│   ├── train_data.csv
-│   ├── test_data.csv
-│   └── dataset_info.txt
-│
-├── requirements.txt
-├── README.md
-│
-├── individual_profiles/
-│
-└── screenshots/
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
 ```
 
----
-
-# 🚀 Upcoming Stages
-
-The following stages will be completed in future phases:
-
-- Hyperparameter Tuning
-- SHAP Explainability
-- Streamlit Deployment
-- Final Documentation
-- Final PPT Presentation
-
----
-
----
-
-# 📁 Current Project Structure
+### 2. Install Dependencies
 
 ```bash
-Loan-Default-Risk-Classification/
-│
-├── notebooks/
-│   └── 1_Data_Cleaning_and_EDA.ipynb
-│
-├── data/
-│   ├── train_data.csv
-│   ├── test_data.csv
-│   └── dataset_info.txt
-│
-├── requirements.txt
-├── README.md
-│
-├── individual_profiles/
-│
-└── screenshots/
-```
-
----
-
-# 🚀 How to Run the Notebook
-
-```bash
-# Clone repository
-git clone https://github.com/YOUR_USERNAME/Loan-Default-Risk-Classification.git
-
-# Install dependencies
 pip install -r requirements.txt
+```
 
-# Open notebook using Google Colab or Jupyter Notebook
+### requirements.txt
+
+```txt
+streamlit>=1.28.0
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+lightgbm>=4.0.0
+plotly>=5.17.0
+matplotlib>=3.7.0
+joblib>=1.3.0
+imbalanced-learn
+shap
+```
+
+### 3. Download Dataset
+
+Download the Home Credit Default Risk dataset from Kaggle and place:
+
+```text
+application_train.csv
+```
+
+inside the project directory.
+
+### 4. Run Jupyter Notebook
+
+```bash
+jupyter notebook project3.ipynb
+```
+
+### 5. Launch Streamlit App
+
+```bash
+streamlit run app.py
+```
+
+Open browser:
+
+```text
+http://localhost:8501
 ```
 
 ---
 
-# 📚 References
+## 📂 Project Structure
 
-- Home Credit Default Risk Dataset
+```text
+.
+├── project3.ipynb
+├── app.py
+├── requirements.txt
+├── application_train.csv
+├── train_data.csv
+├── test_data.csv
+├── models/
+│   ├── lgb_model.pkl
+│   ├── lr_model.pkl
+│   ├── rf_model_compressed.pkl.gz
+│   ├── scaler_compressed.pkl.gz
+│   └── meta.json
+└── screenshots/
+```
+
+---
+
+## 🔗 Live Deployment
+
+🌐 Streamlit App: *https://loan-default-risk-classification-project3.streamlit.app/*
+
+---
+# 🖼️ Application Screenshots
+
+---
+
+## 🏠 Home Screen
+
+<img width="1920" height="1200" alt="home_app" src="https://github.com/user-attachments/assets/13777081-a35a-4379-a7b4-c9650c0ea8a8" />
+
+
+---
+
+## 🟢 Low Risk Prediction
+
+<img width="1920" height="2392" alt="low_risk" src="https://github.com/user-attachments/assets/fb8350a5-808e-447d-945c-d7fb88772b1c" />
+
+
+---
+
+## 🟡 Medium Risk Prediction
+
+<img width="1920" height="2392" alt="medium_risk" src="https://github.com/user-attachments/assets/1393c20a-8b6f-4d71-a145-6d706a55d226" />
+
+
+---
+
+## 🔴 High Risk Prediction
+
+<img width="1920" height="2392" alt="high_risk" src="https://github.com/user-attachments/assets/7c5e9cf9-af5c-4e8d-855f-fa09b0a391c3" />
+
+
+---
+## 🛡️ Regulatory Compliance Note
+
+This project uses SHAP explainability to support transparent AI-assisted credit risk decisions. Each prediction can be interpreted using feature contribution analysis, supporting fairness and compliance requirements in banking and fintech systems.
+
+---
+
+## 📚 References
+
+- Home Credit Default Risk — Kaggle
 - LightGBM Documentation
 - SHAP Documentation
-- Scikit-learn Documentation
+- Imbalanced-learn Documentation
 - Streamlit Documentation
-
----
-
-# 📜 License
-
-This project was developed as part of the Predictive Analytics course project.
