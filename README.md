@@ -19,9 +19,9 @@
 
 | Name | Role |
 |---|---|
-| Member 1 | Data Preprocessing, EDA, Feature Engineering |
-| Member 2 | Model Building & Evaluation |
-| Member 3 | Deployment & Documentation |
+| Member 1 | Sreekutty Santhosh |
+| Member 2 | Theertha Vijayachandran|
+| Member 3 | Laniya Mohan |
 
 ---
 
