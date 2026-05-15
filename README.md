@@ -183,16 +183,166 @@ The dataset was split into training and testing sets using stratified sampling t
 Stratified sampling was used because the dataset is highly imbalanced.
 
 ---
+# 🤖 Stage 6: Model Training & Evaluation
 
-# 🚧 Upcoming Stages
+## Handling Imbalanced Data
 
-The following stages will be completed in upcoming project phases:
+Since the dataset is highly imbalanced, SMOTE (Synthetic Minority Oversampling Technique) was applied to the training dataset to improve the model’s ability to identify default cases.
 
-- Model Building & Training
-- Model Evaluation & Comparison
+Benefits of using SMOTE:
+- Improves minority class learning
+- Reduces model bias toward non-default cases
+- Enhances recall for risky borrower detection
+
+---
+
+## Feature Scaling
+
+Feature scaling was applied using `StandardScaler` for models sensitive to feature magnitude, especially Logistic Regression.
+
+Scaled features help:
+- improve convergence speed
+- reduce training instability
+- improve model performance
+
+---
+
+# 🧠 Machine Learning Models Used
+
+The following machine learning models were trained and evaluated:
+
+| Model | Purpose |
+|---|---|
+| Logistic Regression | Baseline interpretable classification model |
+| Random Forest Classifier | Ensemble learning for nonlinear relationships |
+| LightGBM Classifier | Gradient boosting for high-performance prediction |
+
+---
+
+# 📈 Logistic Regression
+
+Logistic Regression was trained using scaled and SMOTE-balanced data.
+
+### Important Configurations
+- `class_weight='balanced'`
+- `max_iter=1000`
+- L2 regularization applied
+
+### Purpose
+- Provides interpretable predictions
+- Commonly used in banking risk analytics
+- Serves as a strong baseline classification model
+
+---
+
+# 🌲 Random Forest Classifier
+
+Random Forest was trained using ensemble learning techniques to improve prediction performance.
+
+### Important Configurations
+- `n_estimators=300`
+- `max_depth=12`
+- `class_weight='balanced'`
+
+### Purpose
+- Captures nonlinear feature interactions
+- Reduces overfitting through multiple decision trees
+- Improves classification stability
+
+---
+
+# ⚡ LightGBM Classifier
+
+LightGBM was implemented as an advanced gradient boosting model for improved predictive performance.
+
+### Important Configurations
+- Gradient boosting framework
+- Optimized learning rate
+- Scale positive weight adjustment for imbalance handling
+
+### Purpose
+- Faster training
+- Better handling of large datasets
+- Improved prediction performance on imbalanced financial data
+
+---
+
+# 📊 Model Evaluation Metrics
+
+The following evaluation metrics were used to compare model performance:
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- ROC-AUC Score
+
+Recall was considered particularly important because correctly identifying risky borrowers is critical in banking applications.
+
+---
+
+# 📉 Confusion Matrix Analysis
+
+Confusion matrices were generated for all trained models to visualize classification performance.
+
+The confusion matrix helps identify:
+- True Positives
+- True Negatives
+- False Positives
+- False Negatives
+
+This analysis provides deeper insight into how effectively each model predicts loan defaults and non-default cases.
+
+---
+
+# 🏆 Model Comparison
+
+The trained machine learning models were compared based on:
+- predictive performance
+- recall
+- classification stability
+- ability to detect risky borrowers
+
+Ensemble methods such as Random Forest and LightGBM showed improved capability in handling complex financial risk patterns compared to baseline models.
+
+---
+
+# 📁 Updated Project Structure
+
+```bash
+Loan-Default-Risk-Classification/
+│
+├── notebooks/
+│   ├── 1_Data_Cleaning_and_EDA.ipynb
+│   ├── 2_Feature_Selection.ipynb
+│   └── 3_Model_Training.ipynb
+│
+├── data/
+│   ├── train_data.csv
+│   ├── test_data.csv
+│   └── dataset_info.txt
+│
+├── requirements.txt
+├── README.md
+│
+├── individual_profiles/
+│
+└── screenshots/
+```
+
+---
+
+# 🚀 Upcoming Stages
+
+The following stages will be completed in future phases:
+
+- Hyperparameter Tuning
 - SHAP Explainability
 - Streamlit Deployment
-- Final Documentation & PPT
+- Final Documentation
+- Final PPT Presentation
+
+---
 
 ---
 
