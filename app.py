@@ -6,7 +6,6 @@ import pickle
 import gzip
 import json
 import plotly.graph_objects as go
-import plotly.express as px
 import warnings
 import os
 
@@ -29,6 +28,7 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+
 .main-header {
     font-size: 2.5rem;
     color: #1f77b4;
@@ -59,6 +59,7 @@ st.markdown("""
     color: #333;
     text-align: center;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -69,10 +70,12 @@ st.markdown("""
 def load_model(filepath):
 
     if filepath.endswith(".gz"):
+
         with gzip.open(filepath, "rb") as f:
             return pickle.load(f)
 
     else:
+
         with open(filepath, "rb") as f:
             return pickle.load(f)
 
@@ -90,22 +93,18 @@ def load_all_models():
     # Random Forest (compressed)
     rf_model = load_model(f"{models_dir}/rf_model_compressed.pkl.gz")
 
-    # Scaler (compressed)
-    scaler = load_model(f"{models_dir}/scaler_compressed.pkl.gz")
-
     # Metadata
     with open(f"{models_dir}/meta.json", "r") as f:
         meta = json.load(f)
 
-    return lgb_model, rf_model, lr_model, scaler, meta
+    return lgb_model, rf_model, lr_model, meta
 
-# Load everything
-lgb_model, rf_model, lr_model, scaler, meta = load_all_models()
+# Load models
+lgb_model, rf_model, lr_model, meta = load_all_models()
 
 FEATURE_NAMES = meta['feature_names']
 OPTIMAL_THRESHOLD = meta['optimal_threshold']
 LGB_METRICS = meta['lgb_metrics']
-FEATURE_IMPORTANCE = meta['feature_importance']
 
 # ==========================================
 # HELPER FUNCTIONS
@@ -141,7 +140,7 @@ def create_gauge_chart(probability):
                 {'range': [0, 30], 'color': "lightgreen"},
                 {'range': [30, 60], 'color': "yellow"},
                 {'range': [60, 100], 'color': "salmon"}
-            ],
+            ]
         }
     ))
 
@@ -150,7 +149,7 @@ def create_gauge_chart(probability):
     return fig
 
 # ==========================================
-# APP UI
+# APP HEADER
 # ==========================================
 
 st.markdown(
@@ -159,6 +158,10 @@ st.markdown(
 )
 
 st.markdown("---")
+
+# ==========================================
+# SIDEBAR
+# ==========================================
 
 st.sidebar.header("📋 Model Information")
 
@@ -173,7 +176,7 @@ F1 Score : {LGB_METRICS['f1_score']:.3f}
 """)
 
 # ==========================================
-# INPUTS
+# INPUT SECTION
 # ==========================================
 
 st.subheader("📝 Applicant Information")
@@ -236,81 +239,114 @@ loan_to_income_ratio = calculate_loan_to_income_ratio(
 
 if st.button("🔮 Predict Default Risk"):
 
-    days_birth = -age * 365
-    days_employed = -employment_years * 365
+    st.write("Prediction processing...")
 
-    features = np.array([[
-        amt_income_total,
-        amt_credit,
-        amt_annuity,
-        amt_goods_price,
-        ext_source_2,
-        days_birth,
-        days_employed,
-        loan_to_income_ratio
-    ]])
+    try:
 
-    features_scaled = scaler.transform(features)
+        # Convert to training format
+        days_birth = -age * 365
+        days_employed = -employment_years * 365
 
-    # Main prediction
-    probability = lgb_model.predict_proba(features_scaled)[0][1]
+        # Features
+        features = np.array([[
+            amt_income_total,
+            amt_credit,
+            amt_annuity,
+            amt_goods_price,
+            ext_source_2,
+            days_birth,
+            days_employed,
+            loan_to_income_ratio
+        ]])
 
-    prediction = (
-        1 if probability >= OPTIMAL_THRESHOLD else 0
-    )
+        # ==========================================
+        # MODEL PREDICTIONS
+        # ==========================================
 
-    # Other models
-    rf_proba = rf_model.predict_proba(features_scaled)[0][1]
+        probability = lgb_model.predict_proba(features)[0][1]
 
-    lr_proba = lr_model.predict_proba(features_scaled)[0][1]
-
-    st.markdown("---")
-
-    risk_text, risk_class, risk_icon = get_risk_level(probability)
-
-    st.markdown(f"""
-    <div class="{risk_class}">
-        <h2>{risk_icon} {risk_text}</h2>
-        <h3>Default Probability: {probability:.1%}</h3>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Gauge chart
-    fig = create_gauge_chart(probability)
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    # Model comparison
-    st.subheader("📊 Model Comparison")
-
-    comparison_df = pd.DataFrame({
-        "Model": [
-            "LightGBM",
-            "Random Forest",
-            "Logistic Regression"
-        ],
-
-        "Probability": [
-            f"{probability:.1%}",
-            f"{rf_proba:.1%}",
-            f"{lr_proba:.1%}"
-        ]
-    })
-
-    st.dataframe(comparison_df, use_container_width=True)
-
-    # Final recommendation
-    st.subheader("📝 Final Recommendation")
-
-    if prediction == 1:
-        st.warning(
-            "⚠️ High default risk detected. Manual review recommended."
+        prediction = (
+            1 if probability >= OPTIMAL_THRESHOLD else 0
         )
 
-    else:
-        st.success(
-            "✅ Applicant appears creditworthy."
+        rf_proba = rf_model.predict_proba(features)[0][1]
+
+        lr_proba = lr_model.predict_proba(features)[0][1]
+
+        st.markdown("---")
+
+        # ==========================================
+        # RISK DISPLAY
+        # ==========================================
+
+        risk_text, risk_class, risk_icon = get_risk_level(probability)
+
+        st.markdown(f"""
+        <div class="{risk_class}">
+            <h2>{risk_icon} {risk_text}</h2>
+            <h3>Default Probability: {probability:.1%}</h3>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ==========================================
+        # GAUGE CHART
+        # ==========================================
+
+        fig = create_gauge_chart(probability)
+
+        st.plotly_chart(
+            fig,
+            use_container_width=True
         )
+
+        # ==========================================
+        # MODEL COMPARISON
+        # ==========================================
+
+        st.subheader("📊 Model Comparison")
+
+        comparison_df = pd.DataFrame({
+
+            "Model": [
+                "LightGBM",
+                "Random Forest",
+                "Logistic Regression"
+            ],
+
+            "Probability": [
+                f"{probability:.1%}",
+                f"{rf_proba:.1%}",
+                f"{lr_proba:.1%}"
+            ]
+
+        })
+
+        st.dataframe(
+            comparison_df,
+            use_container_width=True
+        )
+
+        # ==========================================
+        # FINAL RECOMMENDATION
+        # ==========================================
+
+        st.subheader("📝 Final Recommendation")
+
+        if prediction == 1:
+
+            st.warning(
+                "⚠️ High default risk detected. Manual review recommended."
+            )
+
+        else:
+
+            st.success(
+                "✅ Applicant appears creditworthy."
+            )
+
+    except Exception as e:
+
+        st.error(f"Prediction Error: {str(e)}")
 
 # ==========================================
 # FOOTER
