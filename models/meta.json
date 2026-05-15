@@ -1,0 +1,85 @@
+{
+  "model_type": "LightGBM (Optimized)",
+  "optimal_threshold": 0.4563508155092244,
+  "feature_names": [
+    "AMT_INCOME_TOTAL",
+    "AMT_CREDIT",
+    "AMT_ANNUITY",
+    "AMT_GOODS_PRICE",
+    "EXT_SOURCE_2",
+    "DAYS_BIRTH",
+    "DAYS_EMPLOYED",
+    "LOAN_TO_INCOME_RATIO"
+  ],
+  "feature_importance": {
+    "AMT_ANNUITY": 1424,
+    "DAYS_BIRTH": 1245,
+    "AMT_CREDIT": 1225,
+    "EXT_SOURCE_2": 1189,
+    "AMT_GOODS_PRICE": 1105,
+    "DAYS_EMPLOYED": 1098,
+    "LOAN_TO_INCOME_RATIO": 978,
+    "AMT_INCOME_TOTAL": 736
+  },
+  "lgb_metrics": {
+    "accuracy": 0.5639,
+    "precision": 0.1159,
+    "recall": 0.6638,
+    "f1_score": 0.1973,
+    "optimal_threshold": 0.4563508155092244
+  },
+  "rf_metrics": {
+    "accuracy": 0.9193,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0
+  },
+  "lr_metrics": {
+    "accuracy": 0.6624,
+    "precision": 0.1356,
+    "recall": 0.5921,
+    "f1_score": 0.2207
+  },
+  "class_distribution": {
+    "train": {
+      "no_default": 226148,
+      "default": 19860
+    },
+    "test": {
+      "no_default": 56538,
+      "default": 4965
+    }
+  },
+  "confusion_matrices": {
+    "lgb": [
+      [
+        31384,
+        25154
+      ],
+      [
+        1669,
+        3296
+      ]
+    ],
+    "rf": [
+      [
+        56538,
+        0
+      ],
+      [
+        4965,
+        0
+      ]
+    ],
+    "lr": [
+      [
+        37798,
+        18740
+      ],
+      [
+        2025,
+        2940
+      ]
+    ]
+  }
+}
