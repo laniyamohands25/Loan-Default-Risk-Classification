@@ -17,11 +17,12 @@
 
 # 👥 Team Members
 
-| Name | Role |
+| Name | |
 |---|---|
-| Member 1 | Sreekutty Santhosh |
-| Member 2 | Theertha Vijayachandran|
-| Member 3 | Laniya Mohan |
+|Group  | Project3 |
+| Sreekutty Santhosh | |
+| Laniya Mohan |  |
+|Theertha Vijayachandran |  |
 
 ---
 
