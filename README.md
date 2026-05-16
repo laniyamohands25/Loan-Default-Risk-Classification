@@ -160,23 +160,23 @@ Models evaluated using:
 Primary optimization target: **Recall**, to reduce false negatives and risky loan approvals.
 
 #### Evaluation Visualizations
--correlation heatmap
+# -correlation heatmap
 -<img width="898" height="657" alt="heatmap" src="https://github.com/user-attachments/assets/172ad8e6-9e6a-494d-9e1f-eb2014e15f25" />
 
--loan to income ratio vs default plot
--<img width="686" height="470" alt="loan to income ratio vs default" src="https://github.com/user-attachments/assets/49d78d29-5b71-415a-93cc-bfbe991f8a7d" />
+# -loan to income ratio vs default plot
+- <img width="686" height="470" alt="loan to income ratio vs default" src="https://github.com/user-attachments/assets/49d78d29-5b71-415a-93cc-bfbe991f8a7d" />
 
-- Confusion matrices
+# - Confusion matrices
 - <img width="1388" height="431" alt="Screenshot 2026-05-16 171832" src="https://github.com/user-attachments/assets/84234d0d-f9c5-4bc6-8dfd-c9a10137c276" />
 
-- ROC curves
+# - ROC curves
 - <img width="889" height="590" alt="ROC_curve" src="https://github.com/user-attachments/assets/6c19f3e9-7214-4198-bc18-5f2522ea7d1c" />
 
-- Precision-Recall curves
+# - Precision-Recall curves
 - <img width="889" height="590" alt="precison Recall curves" src="https://github.com/user-attachments/assets/5c6c2f8f-2e69-4769-a0e7-63d6baabadf9" />
 
--5 fold cross validation
-<img width="690" height="390" alt="5 fold cross validation" src="https://github.com/user-attachments/assets/8e0fa7a1-5605-4906-8141-01d272f09c4b" />
+# -5 fold cross validation
+- <img width="690" height="390" alt="5 fold cross validation" src="https://github.com/user-attachments/assets/8e0fa7a1-5605-4906-8141-01d272f09c4b" />
 
 
 
