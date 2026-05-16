@@ -160,10 +160,16 @@ Models evaluated using:
 Primary optimization target: **Recall**, to reduce false negatives and risky loan approvals.
 
 #### Evaluation Visualizations
+-correlation heatmap
+-<img width="898" height="657" alt="heatmap" src="https://github.com/user-attachments/assets/172ad8e6-9e6a-494d-9e1f-eb2014e15f25" />
+
+-loan to income ratio vs default plot
+<img width="686" height="470" alt="loan to income ratio vs default" src="https://github.com/user-attachments/assets/49d78d29-5b71-415a-93cc-bfbe991f8a7d" />
 
 - Confusion matrices
-- ROC curves
-- Precision-Recall curves
+- <img width="1388" height="431" alt="Screenshot 2026-05-16 171832" src="https://github.com/user-attachments/assets/84234d0d-f9c5-4bc6-8dfd-c9a10137c276" />
+
+
 
 ### Stage 8 — Explainability Using SHAP
 
