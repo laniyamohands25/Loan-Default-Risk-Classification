@@ -1,6 +1,6 @@
 # 🏦 Loan Default Risk Classification
 
-> **Project #__ — Predictive Analytics (Group Project)**
+> **Project #11 — Predictive Analytics (Group Project3)**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://loan-default-risk-classification-project3.streamlit.app/)
 
@@ -23,10 +23,10 @@
 
 | Name |  |
 |---|---|
-| Project __ | Group __ |
-| Sreekutty Santhosh |  |
-| Laniya Mohan |  |
-| Theertha Vijyachandran |  |
+| Project3 | Group 8 |
+| Sreekutty Santhosh | Bio-AI |
+| Laniya Mohan |Bio-AI  |
+| Theertha Vijyachandran | Bio-AI |
 
 
 ---
@@ -293,19 +293,35 @@ http://localhost:8501
 
 ```text
 .
-├── project3.ipynb
-├── app.py
-├── requirements.txt
-├── application_train.csv
-├── train_data.csv
-├── test_data.csv
+├── data/
+│   ├── train_data.csv
+│   └── test_data.csv
+│
+├── images/
+│   ├── eda/
+│   ├── evaluation/
+│   ├── shap/
+│   └── app/
+│
+├── individual_profiles/
+│
 ├── models/
 │   ├── lgb_model.pkl
 │   ├── lr_model.pkl
 │   ├── rf_model_compressed.pkl.gz
 │   ├── scaler_compressed.pkl.gz
 │   └── meta.json
-└── screenshots/
+│
+├── notebooks/
+│   └── project3 (Workflow).ipynb
+│
+├── .gitignore
+├── LICENSE
+├── Loan Default Risk Classification.pptx
+├── README.md
+├── app.py
+├── model_evaluation.ipynb
+└── requirements.txt
 ```
 
 ---
