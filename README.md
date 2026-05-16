@@ -24,9 +24,9 @@
 | Name |  |
 |---|---|
 | Project3 | Group 8 |
-| Sreekutty Santhosh | Bio-AI |
-| Laniya Mohan |Bio-AI  |
-| Theertha Vijyachandran | Bio-AI |
+| Sreekutty Santhosh | Bio-AI (253213)|
+| Laniya Mohan |Bio-AI (253218) |
+| Theertha Vijyachandran | Bio-AI (253223|
 
 
 ---
